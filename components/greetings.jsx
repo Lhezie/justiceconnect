@@ -1,24 +1,18 @@
 import React from 'react';
 
-const Greetings = ({ timeOfDay }) => {
-  let greet;
+const Greetings = () => {
+  const currentHour = new Date().getHours();
 
-  if (timeOfDay === 'morning') {
+  let greet;
+  if (currentHour >= 5 && currentHour < 12) {
     greet = 'Good Morning';
-  } else if (timeOfDay === 'afternoon') {
+  } else if (currentHour >= 12 && currentHour < 18) {
     greet = 'Good Afternoon';
-  } else if (timeOfDay === 'evening') {
-    greet = 'Good Evening';
   } else {
-    greet = 'Hi';
+    greet = 'Good Evening';
   }
 
-  return (
-    <div>
-      {greet}
-    </div>
-  );
+  return <div>{greet}!</div>;
 };
 
 export default Greetings;
-
