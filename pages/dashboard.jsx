@@ -90,7 +90,7 @@ const Dashboard = () => {
       <form onSubmit={formik.handleSubmit} className="mt-6 bg-white p-4 rounded-lg shadow">
         <h3 className="text-lg font-semibold">Submit New Case</h3>
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <label className="block">Case Title</label>
           <input
             type="text"
@@ -103,9 +103,9 @@ const Dashboard = () => {
           {formik.touched.caseTitle && formik.errors.caseTitle && (
             <p className="text-red-500 text-sm">{formik.errors.caseTitle}</p>
           )}
-        </div>
+        </div> */}
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <label className="block">Case Description</label>
           <textarea
             name="caseDescription"
@@ -117,7 +117,7 @@ const Dashboard = () => {
           {formik.touched.caseDescription && formik.errors.caseDescription && (
             <p className="text-red-500 text-sm">{formik.errors.caseDescription}</p>
           )}
-        </div>
+        </div> */}
 
         <button
           type="submit"
