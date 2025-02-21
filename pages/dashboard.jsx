@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const Dashboard = () => {
-  const formik = useFormik({
+  
+    const formik = useFormik({
     initialValues: { caseTitle: '', caseDescription: '' },
     validationSchema: Yup.object({
       caseTitle: Yup.string().required('Case Title is required'),
