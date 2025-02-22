@@ -19,4 +19,7 @@ model User {
   email         String  @unique
   password      String @db.VarChar(255)
   phoneNumber   String @unique
+  role           String  @default("client")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

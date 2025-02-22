@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
-
+import axios from "axios";
 import Greetings from "../components/greetings";
 
-const clientDashboard = () => {
+const ClientDashboard = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("./api/auth/me", {
+          withCredentials: true, // ✅ Ensures cookies are included
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Fetch User Error:", error.response?.data);
+        toast.error(error?.response?.data?.message || "Failed to fetch user data.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div>
       <ToastContainer />
-      <div className=" min-h-screen h-fit px-4 bg-blue-50">
-        <div className=" pt-12 flex items-center">
+      <div className="min-h-screen h-fit px-4 bg-blue-50">
+        <div className="pt-12 flex items-center">
           <div className="flex justify-center mb-6">
             <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-lg">
               <Image
@@ -23,27 +45,13 @@ const clientDashboard = () => {
             </div>
           </div>
           <Greetings />
-          <span className="px-2">name</span>
-        </div>
-
-        <div className="card bg-base-100 image-full w-96 shadow-xl">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
+          <span className="px-2 font-semibold text-gray-800">
+            {user ? user.fullName : "Loading..."}
+          </span>
         </div>
       </div>
     </div>
   );
 };
 
-export default clientDashboard;
+export default ClientDashboard;
