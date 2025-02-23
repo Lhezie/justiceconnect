@@ -10,20 +10,23 @@ const ClientDashboard = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
-        const response = await axios.get("./api/auth/me", {
-          withCredentials: true, // ✅ Ensures cookies are included
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        setUser(response.data.user);
-      } catch (error) {
-        console.error("Fetch User Error:", error.response?.data);
-        toast.error(error?.response?.data?.message || "Failed to fetch user data.");
-      }
-    };
+        try {
+          const response = await axios.get("./api/auth/me", {
+            withCredentials: true, // ✅ Ensures cookies are sent
+            headers: { "Content-Type": "application/json" },
+          });
+      
+          if (response.data && response.data.user) {
+            setUser(response.data.user);
+          } else {
+            toast.error("No user data found.");
+          }
+        } catch (error) {
+          console.error("Fetch User Error:", error.response?.data);
+          toast.error(error.response?.data?.message || "Failed to fetch user data.");
+        }
+      };
+      
 
     fetchUserData();
   }, []);
@@ -46,7 +49,7 @@ const ClientDashboard = () => {
           </div>
           <Greetings />
           <span className="px-2 font-semibold text-gray-800">
-            {user ? user.fullName : "Loading..."}
+            {user ? user?.fullName : "Loading..."}
           </span>
         </div>
       </div>
