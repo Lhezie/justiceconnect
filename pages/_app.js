@@ -1,5 +1,7 @@
 
 import '../styles/globals.css'
+import "react-toastify/dist/ReactToastify.css";
+
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
