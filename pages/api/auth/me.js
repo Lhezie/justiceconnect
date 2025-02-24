@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import cookie from "cookie";
+import * as cookie from "cookie";
 import jwt from "jsonwebtoken";
 
-const prisma = new PrismaClient();
+const prisma = global.prisma || new PrismaClient();
+if (process.env.NODE_ENV === "development") global.prisma = prisma;
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -10,7 +11,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Check if cookies exist before parsing
+    // Log incoming cookies
+    console.log("Received Cookies:", req.headers.cookie);
+
     if (!req.headers.cookie) {
       return res.status(401).json({ message: "Unauthorized - No cookies found" });
     }
@@ -23,12 +26,18 @@ export default async function handler(req, res) {
       return res.status(401).json({ message: "Unauthorized - No token found" });
     }
 
-    // Verify the token
+    // Verify the token using the correct secret
     let decoded;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
+      decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET); // Fix: Use JWT_REFRESH_SECRET
     } catch (err) {
       return res.status(403).json({ message: "Forbidden - Invalid token" });
+    }
+
+    console.log("Decoded Token:", decoded);
+
+    if (!decoded.id) {
+      return res.status(403).json({ message: "Invalid Token Payload - Missing user ID" });
     }
 
     // Fetch the user
@@ -41,7 +50,7 @@ export default async function handler(req, res) {
     res.status(200).json({ user });
 
   } catch (error) {
-    console.error("Error in /api/auth/me:", error); 
+    console.error("Error in /api/auth/me:", error);
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 }
