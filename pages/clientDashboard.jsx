@@ -8,10 +8,11 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import UseAuthProvider from "../store/authProvider";
 import { Formateddate } from "../utils/date";
 import { ClientCaseOverview } from "../components/clientCaseOverview";
-import ClientNavBar from "../components/clientNavBar";
+import  ClientNav  from "../components/clientNav";
+
 
 const ClientDashboard = () => {
- 
+  // const [user, setUser] = useState(null);
   const { user, setUser } = UseAuthProvider();
 
   useEffect(() => {
@@ -40,8 +41,8 @@ const ClientDashboard = () => {
 
   return (
     <div>
-          <ToastContainer />
-          <ClientNavBar/>
+     <ToastContainer />
+     <ClientNav/>
       <div className="min-h-screen h-fit px-4 bg-blue-50 w-full text-sm md:text-md lg:text-lg">
         <div className="pt-12 grid grid-cols-2 ">
           <div className=" flex">
@@ -80,7 +81,7 @@ const ClientDashboard = () => {
                   <div></div>
               </div>
               
-              <ClientCaseOverview/>
+              {/* <ClientCaseOverview/> */}
       </div>
     </div>
   );

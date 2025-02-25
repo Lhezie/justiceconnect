@@ -4,7 +4,7 @@
 const nextConfig = {
   /* config options here */
   experimental: {
-    runtime: "nodejs", 
+    // runtime: "nodejs", 
   },
 }
  
