@@ -1,20 +1,25 @@
 import React from "react";
+import Image from "next/image";
+import { IoNotificationsOutline } from "react-icons/io5";
+import ClientSideBar from "./clientSideBar";
 
 export const ClientNavBar = () => {
   return (
     <div>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
-        </div>
-        <div className="flex-none">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <div className="indicator">
+      {/* Drawer Wrapper */}
+      <div className="drawer drawer-end">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+
+        {/* NAVBAR CONTENT */}
+        <div className="drawer-content">
+          <div className="navbar bg-blue-400">
+            {/* hamburger */}
+            <div className="flex-1">
+              {/* Connect to the drawer */}
+              <label
+                htmlFor="my-drawer-4"
+                className=" drawer-button block md:hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -26,58 +31,41 @@ export const ClientNavBar = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    d="M4 6h16M4 12h16M4 18h7"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">8</span>
+              </label>
+              {/* logo */}
+              <div className="italic font-inter font-light text-sm md:texl-xl md:font-bold">
+                JusticeConnect
               </div>
             </div>
-            <div
-              tabIndex={0}
-              className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
-            >
-              <div className="card-body">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
+
+            <div className="flex-none flex items-center gap-2">
+              {/* settings */}
+              
+              {/* notification */}
+              <IoNotificationsOutline className="text-xl md:text-2xl lg:text-3xl text-blue-900" />
+              {/* profile picture */}
+              <div className="w-[2rem] h-[2rem] md:w-12 md:h-12 rounded-full overflow-hidden flex items-center justify-center shadow-lg">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src="/lucas-lenzi-2RwB3AHphb4-unsplash.jpg"
+                  alt="Logo"
+                  className="object-cover w-10 h-10 md:w-12 md:h-12 "
                 />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
           </div>
+        </div>
+
+        {/* SIDEBAR CONTENT */}
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ClientSideBar />
         </div>
       </div>
     </div>

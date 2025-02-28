@@ -1,5 +1,6 @@
 
 import '../styles/globals.css'
+import "daisyui/dist/full.css";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
