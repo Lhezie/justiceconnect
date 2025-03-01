@@ -69,7 +69,7 @@ export const ClientSideBarContent = () => {
           <div className="pt-4">
             <div
               onClick={() => router.push("/appointment")}
-              className={`flex items-center py-2 px-2 hover:gradientButton ${
+              className={`flex items-center py-2 px-2 hover:gradientButton  ${
                 pathname === "/appointment" ? "gradientButton" : ""
               }`}
             >
