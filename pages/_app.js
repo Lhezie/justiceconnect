@@ -1,29 +1,32 @@
-
-import '../styles/globals.css'
+import "../styles/globals.css";
 import "daisyui/dist/full.css";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import UseLoadingProvider from "../store/UseLoadingProvider"; // Zustand store
+import UseAuthProvider from "../store/authProvider"; // Zustand store
 
-
-// Dynamically import Loader to prevent SSR
+// Dynamically import Loader with SSR disabled
 const Loader = dynamic(() => import("../components/loader.jsx"), { ssr: false });
 
 function MyApp({ Component, pageProps }) {
-
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading } = UseLoadingProvider();
+  const {user, setUser} = UseAuthProvider(); // New state to check if the component has mounted
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2000); // Simulate loading time
-  }, []);
+    setUser(true); // Ensure client-side rendering is active
+    setLoading(true); // Set loading state
+    setTimeout(() => setLoading(false), 2000); // Simulate loading
+  }, [setLoading]);
+
+  // Prevent rendering until useEffect has run (fix hydration issue)
+  if (!user) return null;
 
   return (
-    <div className="relative">
+    <div className="relative h-screen w-screen overflow-hidden">
       {loading && <Loader />}
-      <Component {...pageProps} />
+      {!loading && <Component {...pageProps} />}
     </div>
   );
 }
 
-export default MyApp
-
-
+export default MyApp;

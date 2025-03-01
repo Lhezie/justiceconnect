@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
+import { ClientSideBarContent } from "./clientSideBarContent";
+
 const ClientSideBar = () => {
   return (
     <>
-      <ul className="menu bg-blue-400  min-h-full w-80 p-4 text-black font-inter">
+      <ul className="menu bg-blue-400  min-h-full w-80 p-4 text-black font-inter overflow-none">
         {/* Sidebar content here */}
 
         {/* logo */}
@@ -19,12 +21,9 @@ const ClientSideBar = () => {
             />
           </div>
         </div>
-        <li>
-          <a>Settings</a>
-        </li>
-        <li>
-          <a>Profile</a>
-        </li>
+
+        {/* sideBar Pages Content */}
+       <ClientSideBarContent/>
       </ul>
     </>
   );

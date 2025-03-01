@@ -7,7 +7,7 @@ export const ClientNavBar = () => {
   return (
     <div>
       {/* Drawer Wrapper */}
-      <div className="drawer drawer-end">
+      <div className="drawer drawer-end ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
         {/* NAVBAR CONTENT */}
@@ -59,7 +59,7 @@ export const ClientNavBar = () => {
         </div>
 
         {/* SIDEBAR CONTENT */}
-        <div className="drawer-side">
+        <div className="drawer-side  over">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"

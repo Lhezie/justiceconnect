@@ -41,18 +41,21 @@ const Dashboard = () => {
 
       <div className="mt-6">
         <h2 className="text-lg font-semibold">Case Overview</h2>
-        <div className="flex gap-4 mt-2">
+        <div className="grid grid-cols-3 gap-4  mt-2 justify-center">
           {caseOverviewData.map((item, index) => (
             <div
               key={index}
-              className={`p-4 rounded-lg ${item.active ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`p-6 rounded-lg text-center flex flex-col items-center justify-center transition-all duration-300 ${
+                item.active ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}
             >
-              <p>{item.label}</p>
-              <p className="text-2xl font-bold">{item.count}</p>
+              <p className="text-lg font-medium">{item.label}</p>
+              <p className="text-3xl font-bold">{item.count}</p>
             </div>
           ))}
         </div>
       </div>
+
 
       <div className="mt-6">
         <h2 className="text-lg font-semibold">Testimonials</h2>

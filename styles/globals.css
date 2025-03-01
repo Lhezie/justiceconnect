@@ -57,3 +57,11 @@ a {
   }
 }
 
+
+/* gradient button color */
+@layer components {
+  .gradientButton {
+    @apply bg-gradient-to-r from-blue-400 via-yellow-500 to-blue-400 text-black  rounded-md transition cursor-pointer ;
+  }
+}
+
